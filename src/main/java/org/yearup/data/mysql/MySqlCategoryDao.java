@@ -29,8 +29,7 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
         List<Category> categories = new ArrayList<>();
 
         String que = """
-               SELECT *
-               FROM categories;""";
+               SELECT * FROM easyshop.categories;""";
 
         try(Connection connection = getConnection();
             PreparedStatement query = connection.prepareStatement(que);
