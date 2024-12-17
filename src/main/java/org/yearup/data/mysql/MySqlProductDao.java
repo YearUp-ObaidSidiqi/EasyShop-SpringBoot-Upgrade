@@ -23,8 +23,8 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
     {
         List<Product> products = new ArrayList<>();
 
+        // Phase Two
         // The SQL query now properly handles price ranges
-
         // #1 - Bug - Price and color filter are fixed!
 
 
