@@ -9,7 +9,7 @@ import org.yearup.data.ProfileDao;
 import org.yearup.models.Profile;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping("profile")

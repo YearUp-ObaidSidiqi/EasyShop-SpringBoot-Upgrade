@@ -57,7 +57,7 @@ public class MySqlProfileDao extends MySqlDaoBase implements ProfileDao {
     @Override
     public Profile getByUserId(int userId) {
 
-        String sql = "SELECT * FROM profiles WHERE user_id = ?";
+        String sql = "SELECT * FROM easyshop.profiles WHERE user_id = ?";
 
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -79,7 +79,7 @@ public class MySqlProfileDao extends MySqlDaoBase implements ProfileDao {
     @Override
     public List<Profile> getAllProfile() {
         List<Profile> profiles = new ArrayList<>();
-        String sql = "SELECT * FROM profiles";
+        String sql = "SELECT * FROM easyshop.profiles";
 
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql);
