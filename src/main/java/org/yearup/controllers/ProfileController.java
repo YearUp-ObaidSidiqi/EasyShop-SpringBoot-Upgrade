@@ -11,20 +11,17 @@ import org.yearup.models.Profile;
 import org.yearup.models.User;
 
 import java.security.Principal;
-import java.util.List;
-
 
 @RestController
 @RequestMapping("profile")
 @CrossOrigin
 
-public class ProfileController{
-
+public class ProfileController {
     private ProfileDao profileDao;
     private UserDao userDao;
 
     @Autowired
-    public ProfileController(ProfileDao profileDao,UserDao userDao ) {
+    public ProfileController(ProfileDao profileDao, UserDao userDao){
         this.profileDao = profileDao;
         this.userDao = userDao;
     }
@@ -35,36 +32,29 @@ public class ProfileController{
         return profileDao.create(profile);
     }
 
-    @PreAuthorize("permitAll()")
-    @GetMapping("{userId}")
-    public Profile getByUserId(@PathVariable int userId, Principal principal){
+    @GetMapping()
+    public Profile getByUserId(Principal principal){
 
         String username = principal.getName();
         User user = userDao.getByUserName(username);
 
         // get profile by id
         Profile profile = profileDao.getByUserId(user.getId());
-
         if (profile == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
         return profile;
     }
 
-    @PreAuthorize("permitAll()")
-    @GetMapping("")
-    public List<Profile> getAllProfile(){
-        return profileDao.getAllProfile();
-    }
-
-    @PreAuthorize("permitAll()")
     @PutMapping()
-    public void updateProfile (@RequestBody Profile profile, Principal principal){
+    public Profile updateProfile(@RequestBody Profile profile, Principal principal) {
 
         String username = principal.getName();
         int userId = userDao.getByUserName(username).getId();
         profile.setUserId(userId);
-
-        profileDao.updateProfile(profile);
+        // Perform the update in the DAO layer and fetch the updated profile
+        Profile updatedProfile = profileDao.updateProfile(profile);
+        // Return the updated profile to the client
+        return updatedProfile;
     }
 }
