@@ -22,38 +22,32 @@ public class ProfileController{
         this.profileDao = profileDao;
     }
 
+    @PreAuthorize("permitAll()")
     @PostMapping()
-    @PreAuthorize("permitAll()")
-    public Optional<Profile> create(@RequestBody Profile profile){
-        try{
-            return Optional.ofNullable(profileDao.create(profile));
-        }
-        catch(Exception ex){
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");
-        }
+    public Profile create(@RequestBody Profile profile){
+        return profileDao.create(profile);
     }
 
-    @GetMapping("{id}")
     @PreAuthorize("permitAll()")
-    public Optional<Profile> getProfileById(@PathVariable int id){
-        if(profileDao.getByUserId(id) == null){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Profile not Found");
+    @GetMapping("{userId}")
+    public Profile getByUserId(@PathVariable int userId){
+        Profile profile = profileDao.getByUserId(userId);
+
+        if (profile == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
-        return Optional.ofNullable(profileDao.getByUserId(id));
+        return profile;
     }
 
-    // add the appropriate annotation for a get action
+    @PreAuthorize("permitAll()")
     @GetMapping("")
-    @PreAuthorize("permitAll()")
-    public List<Profile> getAll(){
-        // find and return all profile
+    public List<Profile> getAllProfile(){
         return profileDao.getAllProfile();
     }
 
-    @PutMapping()
     @PreAuthorize("permitAll()")
-    @ResponseStatus(value = HttpStatus.OK)
-    public Optional<Profile> updateProfile(@RequestBody Profile profile){
-        return Optional.ofNullable(profileDao.updateProfile(profile));
+    @PutMapping()
+    public void update(@RequestBody Profile profile){
+        profileDao.updateProfile(profile);
     }
 }

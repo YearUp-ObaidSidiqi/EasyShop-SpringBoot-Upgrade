@@ -35,15 +35,13 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
             AND (price <= ? OR ? = -1)
             AND (LOWER(color) = LOWER(?) OR ? = '' OR color IS NULL)
             """;
-
-
-      /*  String sql = "SELECT * FROM products " +
+/*
+        String sql = "SELECT * FROM products " +
                 "WHERE (category_id = ? OR ? = -1) " +
                 "  AND (price BETWEEN ? AND ? OR (? = -1 AND ? = -1)) " +
                 "  AND (color = ? OR ? = '')";
+
 */
-
-
         categoryId = categoryId == null ? -1 : categoryId;
         minPrice = minPrice == null ? new BigDecimal("-1") : minPrice;
         maxPrice = maxPrice == null ? new BigDecimal("-1") : maxPrice;
