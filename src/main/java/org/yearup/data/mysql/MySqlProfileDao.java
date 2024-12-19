@@ -96,7 +96,7 @@ public class MySqlProfileDao extends MySqlDaoBase implements ProfileDao {
     }
 
     @Override
-    public Profile updateProfile(Profile profile) {
+    public void updateProfile (Profile profile) {
 
         String sql = """
                 UPDATE profiles SET first_name = ?, last_name = ?, 
@@ -117,16 +117,14 @@ public class MySqlProfileDao extends MySqlDaoBase implements ProfileDao {
             preparedStatement.setString(8, profile.getZip());
             preparedStatement.setInt(9, profile.getUserId());
 
-            int affectedRows = preparedStatement.executeUpdate();
+            preparedStatement.executeUpdate();
 
-            if (affectedRows > 0) {
-                return profile;
-            }
+
         } catch (SQLException e) {
             LOGGER.log(Level.SEVERE, "Error updating profile", e);
             throw new RuntimeException("Failed to update profile", e);
         }
-        return null;
+
     }
 
     // Utility method to map ResultSet to Profile
