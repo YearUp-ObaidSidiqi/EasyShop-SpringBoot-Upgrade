@@ -108,7 +108,7 @@ The database consists of the following tables:
 	4.	Run the application.
 	5.	Use Postman to test the API endpoints.
 ### Data base
-![Here is the screenshots](./Capstone File/database structure.png)
+![Here is the screenshots](./database.png)
 
 ## Contributions
 
