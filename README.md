@@ -107,6 +107,8 @@ The database consists of the following tables:
 	3.	Set up the MySQL database and configure the application properties.
 	4.	Run the application.
 	5.	Use Postman to test the API endpoints.
+### Data base
+![Here is the screenshots](./Capstone File/database structure.png)
 
 ## Contributions
 
